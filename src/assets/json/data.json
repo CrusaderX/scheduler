@@ -1,0 +1,55 @@
+{
+  "board": {
+    "name": "Scheduler",
+    "columns": [
+      {
+        "name": "Monday",
+        "tasks": [
+          {
+            "title": "VIM",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Sign up page",
+                "isCompleted": true
+              },
+              {
+                "title": "Sign in page",
+                "isCompleted": false
+              },
+              {
+                "title": "Welcome page",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Tuesday",
+        "tasks": [
+          {
+            "title": "Haskell",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Sign up page",
+                "isCompleted": true
+              },
+              {
+                "title": "Sign in page",
+                "isCompleted": false
+              },
+              {
+                "title": "Welcome page",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <HeaderVue />
+  <HeaderVue @onAuth="isChanged" />
   <main>
     <div class="flex w-full ">
       <div v-dragscroll:nochilddrag
@@ -7,7 +7,7 @@
         <div data-dragscroll class="mx-auto w-11/12 pt-6 pb-24 ">
           <div data-dragscroll v-if="boardsStore.getColumns" class="flex">
             <Board data-dragscroll />
-            <AddNewColumn class="hidden md:flex"/>
+            <AddNewColumn v-if="isAuth" class="hidden md:flex"/>
           </div>
         </div>
       </div>
@@ -19,7 +19,6 @@
     <TaskForm v-if="managerStore.taskForm.visible" />
     <Delete v-if="managerStore.delete.visible" />
     <BoardForm v-if="managerStore.boardForm.visible" />
-    <SidebarMobile v-if="managerStore.sidebarMobile" />
   </div>
 </template >
   
@@ -32,7 +31,7 @@ import TaskForm from './components/manager/TaskForm.vue';
 import Delete from './components/manager/Delete.vue';
 import BoardForm from './components/manager/BoardForm.vue';
 
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useBoardsStore } from '@/stores/boards.js';
 import { useManagerStore } from '@/stores/manager.js';
 import NoBoards from './components/board/NoBoards.vue';
@@ -40,6 +39,7 @@ import AddNewColumn from './components/board/AddNewColumn.vue';
 
 const boardsStore = useBoardsStore();
 const managerStore = useManagerStore();
+const isAuth = ref(false);
 
 onMounted(async () => {
   boardsStore.$subscribe((mutations, state) => {
@@ -53,4 +53,8 @@ onMounted(async () => {
     boardsStore.$state = JSON.parse(storageData)
   }
 }) 
+
+const isChanged = (auth) => {
+  isAuth.value = auth
+}
 </script>

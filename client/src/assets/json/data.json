@@ -1,0 +1,289 @@
+{
+  "board": {
+    "name": "Scheduler",
+    "columns": [
+      {
+        "name": "Monday",
+        "tasks": [
+          {
+            "title": "NeoVIM",
+            "description": "A bit of NeoVIM and relax",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Install proper plugins",
+                "isCompleted": true
+              },
+              {
+                "title": "Learn how to navigate faster",
+                "isCompleted": false
+              },
+              {
+                "title": "Install proper color scheme",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Leetcode",
+            "description": "A little bit of golang",
+            "status": "Todo",
+            "subtasks": [
+            {
+                "title": "",
+                "isCompleted": false
+            }
+            ]
+          },
+          {
+            "title": "Speetyper",
+            "description": "Learn to type faster",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Play a couple of games in https://www.speedtyper.dev",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to use fingers in proper position, like 10-finger method",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Tuesday",
+        "tasks": [
+          {
+            "title": "Haskell udemy course",
+            "description": "Haskell day",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Write down everything usefull",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to understand every peace of code",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to debug in ghci",
+                "isCompleted": false
+              },
+              {
+                "title": "Understand monads",
+                "isCompleted": false
+              },
+              {
+                "title": "Write HMR tasks in haskell",
+                "isCompleted": false
+              },
+              {
+                "title": "Using modules, implement my own package (project)",
+                "isCompleted": false
+              },
+              {
+                "title": "Finish course",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Leetcode",
+            "description": "A little bit of golang",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "One task in leetcode per day",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Speetyper",
+            "description": "Learn to type faster",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Play a couple of games in https://www.speedtyper.dev",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to use fingers in proper position, like 10-finger method",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wednesday",
+        "tasks": [
+          {
+            "title": "Python",
+            "description": "Python day",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Read a book",
+                "isCompleted": false
+              },
+              {
+                "title": "Write down everything usefull",
+                "isCompleted": false
+              },
+              {
+                "title": "Rewrite lokalise merge keys project",
+                "isCompleted": false
+              },
+              {
+                "title": "Share python knowledge with somebody",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Tests",
+            "description": "Learn about test frameworks",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Write something with pytest",
+                "isCompleted": false
+              },
+              {
+                "title": "Write something with jest",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Leetcode",
+            "description": "A little bit of golang",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "One task in leetcode per day",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Speetyper",
+            "description": "Learn to type faster",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Play a couple of games in https://www.speedtyper.dev",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to use fingers in proper position, like 10-finger method",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Thursday",
+        "tasks": [
+          {
+            "title": "ASM",
+            "description": "NASM day",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Continue reading a book",
+                "isCompleted": false
+              },
+              {
+                "title": "Write down everything usefull",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to understand each line of code (shifts and etc)",
+                "isCompleted": false
+              },
+              {
+                "title": "Write HMR tasks in NASM",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Leetcode",
+            "description": "A little bit of golang",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "One task in leetcode per day",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Speetyper",
+            "description": "Learn to type faster",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Play a couple of games in https://www.speedtyper.dev",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to use fingers in proper position, like 10-finger method",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Friday",
+        "tasks": [
+          {
+            "title": "DevOps",
+            "description": "DevOps day",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Find some new technology",
+                "isCompleted": false
+              },
+              {
+                "title": "Write down everything usefull",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to understand each line of code (shifts and etc)",
+                "isCompleted": false
+              },
+              {
+                "title": "Write HMR tasks in NASM",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "title": "Golang",
+            "description": "A little bit of golang",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "title": "Read a book about golang",
+                "isCompleted": false
+              },
+              {
+                "title": "Try to write something in go",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

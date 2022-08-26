@@ -32,8 +32,8 @@ import Dropdown from '@/components/manager/Dropdown.vue';
 const boardsStore = useBoardsStore();
 const managerStore = useManagerStore();
 const subtasksCompleted = computed(() => {
-  const completed = boardsStore.getTask?.subtasks.filter((sub) => sub.isCompleted).length;
-  const total = boardsStore.getTask?.subtasks.length;
+  const completed = boardsStore.getTask?.subtasks?.filter((sub) => sub.isCompleted).length;
+  const total = boardsStore.getTask?.subtasks?.length;
   return `${completed} of ${total}`
 })
 const changeColumn = ({ index }) => {

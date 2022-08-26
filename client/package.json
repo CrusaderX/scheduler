@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^1.0.2",
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
     "vue-dragscroll": "^4.0.3"

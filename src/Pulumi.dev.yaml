@@ -1,0 +1,13 @@
+config:
+  scheduler:website:
+    acl: public-read
+    name: crusaderx-me-scheduler
+    website: static
+  scheduler:route53:
+    domain: crusaderx.me
+    subdomain: sheduler
+  scheduler:acm:
+    domain: scheduler.crusaderx.me
+  scheduler:cfn:
+    acl: private
+    name: crusaderx-me-cfn-logs

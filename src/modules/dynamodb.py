@@ -1,23 +1,24 @@
 from pulumi_aws.dynamodb import (
     Table,
     TableAttributeArgs,
-    TableGlobalSecondaryIndexArgs,
-    TableTtlArgs,
 )
+
 from models.resources import DynamoDbTableCreateModel
 
 
 class AmazonServiceDynamoDB:
     @staticmethod
-    def set_attributes(attributes: list[dict]) -> TableAttributeArgs:
+    def set_attributes(attributes: list[dict[str, str]]) -> list[TableAttributeArgs]:
+        result = []
         for attribute in attributes:
             for k, v in attribute.items():
-                return TableAttributeArgs(name=k, type=v)
+                result.append(TableAttributeArgs(name=k, type=v))
+        return result
 
     @staticmethod
     def create_table(table: DynamoDbTableCreateModel) -> Table:
-
-        attributes = [AmazonServiceDynamoDB.set_attributes(attributes=table.attributes)]
+        attributes = AmazonServiceDynamoDB.set_attributes(attributes=table.attributes)
+        print(attributes)
 
         return Table(
             table.table_name,

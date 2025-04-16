@@ -1,17 +1,17 @@
-from pulumi_aws.s3 import Bucket, BucketWebsiteArgs, BucketObject
-from pulumi import FileAsset, ResourceOptions
-from typing import Optional
+from pulumi_aws.s3 import Bucket, BucketObject
+from pulumi import FileAsset, Resource, ResourceOptions
 from mimetypes import guess_type
 
-from utils import dict_to_simplenamespace, files_to_upload
+from utils import files_to_upload
+from models.resources import S3BucketCreateModel
 
 
 class AmazonServiceS3:
     @staticmethod
     def upload_to_bucket(
-        bucket: str, path: Optional[str] = ".", acl: Optional[str] = "public-read"
+        parent: Resource, props: S3BucketCreateModel, root: str
     ) -> None:
-        files = files_to_upload(root=path)
+        files = files_to_upload(root=root)
 
         assert files
 
@@ -20,24 +20,13 @@ class AmazonServiceS3:
             BucketObject(
                 relative_path,
                 key=relative_path,
-                acl=acl,
-                bucket=bucket,
+                acl=props.acl,
+                bucket=props.bucket,
                 content_type=content_type,
                 source=FileAsset(key),
-                opts=ResourceOptions(parent=bucket),
+                opts=ResourceOptions(parent=parent),
             )
 
     @staticmethod
-    def create_bucket(props: dict) -> Bucket:
-        props = dict_to_simplenamespace(props)
-
-        if not hasattr(props, "website"):
-            props.website = None
-        else:
-            props.website = BucketWebsiteArgs(
-                index_document="index.html", error_document=""
-            )
-
-        return Bucket(
-            props.name, bucket=props.name, acl=props.acl, website=props.website
-        )
+    def create_bucket(props: S3BucketCreateModel) -> Bucket:
+        return Bucket(**props.model_dump())

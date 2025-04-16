@@ -1,6 +1,8 @@
 from pulumi.output import Output
-from pydantic import BaseModel, Extra, validator, conint
-from typing import Optional, Union, Dict
+from pulumi import ResourceOptions
+from pulumi_aws.s3 import BucketWebsiteArgs
+from pydantic import BaseModel
+from typing import Union
 from enum import Enum
 
 
@@ -20,46 +22,77 @@ class CloudFrontDistributionPriceClassEnum(str, Enum):
     PriceClass_200 = "PriceClass_200"
 
 
-class DynamoDbTableCreateModel(BaseModel):
-    table_name: str
-    attributes: list[dict]
-    hash_key: str
-    range_key: Optional[str]
-    billing_mode: TableBillingEnum = TableBillingEnum.PROVISIONED
-    read_capacity: Optional[conint(gt=0, lt=40_000)] = 5
-    write_capacity: Optional[conint(gt=0, lt=40_000)] = 5
-
-
-class Route53RecordCreateModel(BaseModel):
-    o: str
-    name: object
-    type: Route53RecordTypeEnum = Route53RecordTypeEnum.A
-    records: Optional[list[Output]] = None
-    aliases: Optional[
-        list[dict[Optional[Union[str, Output]], Optional[Union[str, Output]]]]
-    ] = None
-    zone_id: str
-    ttl: Optional[conint(lt=172_800)] = None
+class S3BucketCreateModel(BaseModel):
+    resource_name: str
+    bucket: str
+    acl: str = "public-read"
+    website: BucketWebsiteArgs | None = None
 
     class Config:
         arbitrary_types_allowed = True
 
 
+class DynamoDbTableCreateModel(BaseModel):
+    table_name: str
+    attributes: list[dict[str, str]]
+    hash_key: str
+    range_key: str | None = None
+    billing_mode: TableBillingEnum = TableBillingEnum.PROVISIONED
+    read_capacity: int | None = 5
+    write_capacity: int | None = 5
+
+
+class CertificateCreateModel(BaseModel):
+    resource_name: str
+    domain_name: str
+    validation_method: str = "DNS"
+    opts: ResourceOptions | None = None
+
+    class Config:
+        arbitrary_types_allowed = True
+
+
+class CertificateValidateModel(BaseModel):
+    resource_name: str
+    certificate_arn: Output[str]
+    validation_record_fqdns: list[Output[str]]
+    opts: ResourceOptions | None = None
+
+    class Config:
+        arbitrary_types_allowed = True
+
+
+class Route53RecordCreateModel(BaseModel):
+    resource_name: str
+    name: Union[str, Output[str]]
+    type: Route53RecordTypeEnum = Route53RecordTypeEnum.A
+    records: list[Output[str]] | None = None
+    aliases: list[dict[Output[str], Output[str]]] | None = None
+    zone_id: str
+    ttl: int | None = None
+
+    class Config:
+        arbitrary_types_allowed = True
+
+
+Route53RecordCreateModel.model_rebuild()
+
+
 class CloudFrontDistributionCreateModel(BaseModel):
-    name: str
+    resource_name: str
     aliases: list[str]
-    logging_bucket: Optional[Output] = None
+    logging_bucket: Output | None = None
     website_bucket_arn: Output
     website_bucket_endpoint: Output
-    certificate_arn: Optional[Output] = None
+    certificate_arn: Output | None = None
     price_class: CloudFrontDistributionPriceClassEnum = (
         CloudFrontDistributionPriceClassEnum.PriceClass_100
     )
-    enabled: Optional[bool] = True
-    wait_for_deployment: Optional[bool] = False
-    cache_min_ttl: Optional[int] = 0
-    cache_max_ttl: Optional[int] = 3600
-    cache_default_ttl: Optional[int] = 600
+    enabled: bool | None = True
+    wait_for_deployment: bool | None = False
+    cache_min_ttl: int | None = 0
+    cache_max_ttl: int | None = 3600
+    cache_default_ttl: int | None = 600
 
     class Config:
         arbitrary_types_allowed = True

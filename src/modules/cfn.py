@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from pulumi_aws.cloudfront import (
     Distribution,
     DistributionOriginArgs,
@@ -18,16 +19,16 @@ from models.resources import CloudFrontDistributionCreateModel
 class AmazonServiceCfn:
     @staticmethod
     def create_distribution(
-        distribution: CloudFrontDistributionCreateModel,
+        props: CloudFrontDistributionCreateModel,
     ) -> Distribution:
         return Distribution(
-            distribution.name,
-            enabled=distribution.enabled,
-            aliases=distribution.aliases,
+            resource_name=props.resource_name,
+            enabled=props.enabled,
+            aliases=props.aliases,
             origins=[
                 DistributionOriginArgs(
-                    origin_id=distribution.website_bucket_arn,
-                    domain_name=distribution.website_bucket_endpoint,
+                    origin_id=props.website_bucket_arn,
+                    domain_name=props.website_bucket_endpoint,
                     custom_origin_config=DistributionOriginCustomOriginConfigArgs(
                         origin_protocol_policy="http-only",
                         http_port=80,
@@ -38,7 +39,7 @@ class AmazonServiceCfn:
             ],
             default_root_object="index.html",
             default_cache_behavior=DistributionDefaultCacheBehaviorArgs(
-                target_origin_id=distribution.website_bucket_arn,
+                target_origin_id=props.website_bucket_arn,
                 viewer_protocol_policy="redirect-to-https",
                 allowed_methods=["GET", "HEAD", "OPTIONS"],
                 cached_methods=["GET", "HEAD", "OPTIONS"],
@@ -48,18 +49,20 @@ class AmazonServiceCfn:
                     ),
                     query_string=False,
                 ),
-                min_ttl=distribution.cache_min_ttl,
-                default_ttl=distribution.cache_default_ttl,
-                max_ttl=distribution.cache_max_ttl,
+                min_ttl=props.cache_min_ttl,
+                default_ttl=props.cache_default_ttl,
+                max_ttl=props.cache_max_ttl,
             ),
-            price_class=distribution.price_class,
+            price_class=props.price_class,
             custom_error_responses=[
                 DistributionCustomErrorResponseArgs(
-                    error_code=404, response_code=404, response_page_path="/404.html"
+                    error_code=HTTPStatus.NOT_FOUND,
+                    response_code=HTTPStatus.NOT_FOUND,
+                    response_page_path="/404.html",
                 )
             ],
             viewer_certificate=DistributionViewerCertificateArgs(
-                acm_certificate_arn=distribution.certificate_arn,
+                acm_certificate_arn=props.certificate_arn,
                 ssl_support_method="sni-only",
             ),
             restrictions=DistributionRestrictionsArgs(
@@ -68,10 +71,10 @@ class AmazonServiceCfn:
                 )
             ),
             logging_config=DistributionLoggingConfigArgs(
-                bucket=distribution.logging_bucket,
+                bucket=props.logging_bucket,
                 include_cookies=False,
             )
-            if distribution.logging_bucket
+            if props.logging_bucket
             else None,
-            wait_for_deployment=distribution.wait_for_deployment,
+            wait_for_deployment=props.wait_for_deployment,
         )

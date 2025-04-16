@@ -1,8 +1,8 @@
 config:
   scheduler:website:
     acl: public-read
-    name: crusaderx-me-scheduler
-    website: static
+    bucket: crusaderx-me-scheduler
+    resource_name: website
   scheduler:route53:
     domain: crusaderx.me
     subdomain: sheduler
@@ -10,4 +10,5 @@ config:
     domain: scheduler.crusaderx.me
   scheduler:cfn:
     acl: private
-    name: crusaderx-me-cfn-logs
+    bucket: crusaderx-me-cfn-logs
+    resource_name: cfn-logs

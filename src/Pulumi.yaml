@@ -1,4 +1,5 @@
 name: scheduler
+main: app.py
 runtime:
   name: python
   options:
